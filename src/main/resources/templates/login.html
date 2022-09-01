@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>뇸뇸</title>
+</head>
+<body>
+<h1>LOGIN PAGE</h1>
+<h3 sec:authorize=""isAuthenticated()>WELCOME<span sec:authentication="name"></span>님!</h3>
+<hr>
+<a sec:authorize="isAnonymous()" th:href="@{/login.do}">로그인</a>
+</body>
+
+</html>
