@@ -2,14 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta charset="UTF-8">
-    <title>뇸뇸</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <title>Sign in</title>
 </head>
+
 <body>
-<h1>LOGIN PAGE</h1>
-<h3 sec:authorize=""isAuthenticated()>WELCOME<span sec:authentication="name"></span>님!</h3>
-<hr>
-<a sec:authorize="isAnonymous()" th:href="@{/login.do}">로그인</a>
+<div th:class="main">
+    <p th:class="sign" th:align="center">Sign in</p>
+    <form class="form1">
+        <input th:class="un " th:type="text" th:id="username" th:name="username" th:align="center" th:placeholder="Username">
+        <input th:class="pass" th:type="password" th:id="password" th:name="password" th:align="center" th:placeholder="Password">
+        <a th:class="submit" th:align="center" th:href="@{/print.do}">Sign in</a>
+        <p th:class="forgot" th:align="center">Forgot Password?</p>
+    </form>
+</div>
+
 </body>
+
 
 </html>
