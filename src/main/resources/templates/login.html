@@ -8,19 +8,43 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <title>Sign in</title>
 </head>
-
 <body>
-<div th:class="main">
-    <p th:class="sign" th:align="center">Sign in</p>
-    <form class="form1">
-        <input th:class="un " th:type="text" th:id="username" th:name="username" th:align="center" th:placeholder="Username">
-        <input th:class="pass" th:type="password" th:id="password" th:name="password" th:align="center" th:placeholder="Password">
-        <a th:class="submit" th:align="center" th:href="@{/print.do}">Sign in</a>
-        <p th:class="forgot" th:align="center">Forgot Password?</p>
-    </form>
-</div>
-
+    <div class="main">
+        <p class="sign">Sign in</p>
+        <form class="form1" method="post" action="/print.do">
+            <input class="un" type="text" id="username" name="username" placeholder="Username">
+            <input class="pass" type="password" id="password" name="password" placeholder="Password">
+            <button class="submit">Sign in</button>
+            <p class="forgot" id="forgotPw">Forgot Password?</p>
+        </form>
+    </div>
 </body>
-
-
 </html>
+<script>
+    document.getElementById("forgotPw").addEventListener("click", findPassword);
+
+    function findPassword() {
+        let username = document.getElementById("username").value;
+
+        if (!username) {
+            alert("아이디를 넣어주세요");
+            return false;
+        }
+
+        fetch('http://localhost:8080/print.json',
+        {
+            method:'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username
+            })
+        }).then(function(response){
+            response.json()
+            .then(function(data){
+                document.getElementById("password").value = data.password;
+            });
+        });
+    }
+</script>
