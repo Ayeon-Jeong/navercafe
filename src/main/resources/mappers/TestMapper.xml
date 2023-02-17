@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.navercafe.project1.dao.testDAO">
-    <select id="getTest" resultMap="com.navercafe.project1.vo.testVO">
+<mapper namespace="com.navercafe.project1.dao">
+    <select id="getTest" >
         select title, name
-        from db_test;
+        from db_test
     </select>
 </mapper>

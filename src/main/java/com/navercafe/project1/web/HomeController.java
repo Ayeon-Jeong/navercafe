@@ -3,6 +3,7 @@ package com.navercafe.project1.web;
 import com.navercafe.project1.domain.member.Member;
 import com.navercafe.project1.domain.member.MemberRepository;
 import com.navercafe.project1.session.SessionConst;
+import com.navercafe.project1.vo.HelloData;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -19,12 +21,6 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
     private final MemberRepository memberRepository;
-//    @GetMapping
-//    public String home() {
-//        return "home";
-//    }
-
-//    @GetMapping
     public String loginHome(@CookieValue(name="memberId", required = false) Long memberId, Model model ){
 
         if(memberId == null){
@@ -72,4 +68,39 @@ public class HomeController {
         model.addAttribute("member", loginMember);
         return "loginHome";
     }
+
+    @ResponseBody
+    @GetMapping("request-param-v4")
+    public String requestParamV4(@RequestParam String memberName,
+                                 @RequestParam int memberAge){
+        log.info("username = {}, age = {}", memberName, memberAge);
+        return "ok";
+
+    }
+
+    @ResponseBody
+    @GetMapping("request-param-v5")
+    public String requestParamV5(@RequestParam(required = true, defaultValue = "guest") String memberName,
+                                 @RequestParam(required = false, defaultValue = "-1") Integer memberAge){
+        log.info("username = {}, age = {}", memberName, memberAge);
+        return "ok";
+
+    }
+
+    @ResponseBody
+    @GetMapping("request-param-map")
+    public String requestParamMap(@RequestParam Map<String, Object> paramMap){
+        log.info("username = {}, age = {}", paramMap.get("username"), paramMap.get("age"));
+        return "ok";
+
+    }
+
+    @ResponseBody
+    @GetMapping("model-attribute-v1")
+    public String modelAttributeV1(HelloData helloData){
+        log.info("HelloData = {}", helloData);
+
+        return "ok";
+    }
+
 }
